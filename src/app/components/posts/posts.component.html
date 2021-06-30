@@ -1,0 +1,6 @@
+<ng-container *ngIf="posts.length > 0">
+  <mat-card *ngFor="let post of posts" class="post-container">
+    <mat-card-title>{{ post.name }}</mat-card-title>
+    <mat-card-content>{{ post.post }}</mat-card-content>
+  </mat-card>
+</ng-container>
