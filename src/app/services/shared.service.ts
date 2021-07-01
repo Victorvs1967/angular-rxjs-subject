@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class SharedService {
 
-  public posts: Subject<object[]> = new Subject();
+  public posts = new Subject<object[]>();
 
   setPost(post: any) {
     this.posts.next(post);

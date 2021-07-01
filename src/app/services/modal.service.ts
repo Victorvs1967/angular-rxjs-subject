@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
+export type ModalState = 'open' | 'close';
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
-  private display: Subject<boolean> = new Subject();
+  private display = new Subject<ModalState>();
 
-  watch(): Observable<boolean> {
+  watch(): Observable<ModalState> {
     return this.display.asObservable();
   }
 
   open() {
-    this.display.next(true);
+    this.display.next('open');
   }
 
   close() {
-    this.display.next(false);
+    this.display.next('close');
   }
 
 }

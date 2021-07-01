@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ModalService } from 'src/app/services/modal.service';
+import { ModalService, ModalState } from 'src/app/services/modal.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  display$: Observable<boolean>;
+  display$: Observable<ModalState>;
   public postForm: FormGroup;
 
   constructor(private sharedService: SharedService, private modalService: ModalService, private router: Router) { 
