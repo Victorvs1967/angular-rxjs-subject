@@ -16,7 +16,7 @@ export class PostsHeaderComponent implements OnInit {
   constructor(private sharedService: SharedService, private modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.postSubscription = this.sharedService.getPosts().subscribe(response => this.postsCount++);
+    this.postSubscription = this.sharedService.getPosts().subscribe(() => this.postsCount++);
   }
 
   // Open Modal

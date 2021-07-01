@@ -9,14 +9,14 @@
             <mat-form-field appearance="outline">
               <mat-label>Name</mat-label>
               <input matInput type="text" formControlName="name" placeholder="Name" />
-              <mat-error>Post Name Required</mat-error>
+              <mat-error *ngIf="postForm.controls.post">Post Name Required</mat-error>
             </mat-form-field>        
           </div>
           <div class="form-field">
             <mat-form-field appearance="outline">
               <mat-label>Post</mat-label>
               <textarea matInput rows="4" formControlName="post" placeholder="Post"></textarea>
-              <mat-error>Post Content Required</mat-error>
+              <mat-error *ngIf="postForm.controls.post">Post Content Required</mat-error>
             </mat-form-field>
           </div>
           <div class="form-field">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ModalService, ModalState } from 'src/app/services/modal.service';
@@ -13,31 +13,32 @@ import { Post, SharedService } from 'src/app/services/shared.service';
 export class CreatePostComponent implements OnInit {
 
   display$: Observable<ModalState>;
-  public postForm: FormGroup;
+  postForm: FormGroup;
 
-  constructor(private sharedService: SharedService, private modalService: ModalService, private router: Router) { 
-
+  constructor(private sharedService: SharedService, private modalService: ModalService, private formBuilder: FormBuilder, private router: Router) { 
     this.display$ = this.modalService.watch();
 
-    this.postForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      post: new FormControl('', [Validators.required])
+    this.postForm = this.formBuilder.group({
+      name: [null, { validators: [Validators.required], updateOn: 'change' }],
+      post: [null, { validators: [Validators.required], updateOn: 'change' }]
     });
+
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
 
   onSubmit() {
     const post: Post = {
-      name: this.postForm.get('name')?.value,
-      post: this.postForm.get('post')?.value
+      name: this.postForm.controls.name.value,
+      post: this.postForm.controls.post.value
     }
     this.sharedService.setPost(post);
-    this.postForm.reset();
     this.close();
   }
 
   close() {
+    this.postForm.reset();
     this.modalService.close();
   }
 

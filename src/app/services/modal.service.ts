@@ -7,7 +7,7 @@ export type ModalState = 'open' | 'close';
 })
 export class ModalService {
 
-  private display = new Subject<ModalState>();
+  private display: Subject<ModalState> = new Subject();
 
   watch(): Observable<ModalState> {
     return this.display.asObservable();
