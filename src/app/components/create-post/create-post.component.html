@@ -1,11 +1,14 @@
-<ng-container *ngIf="display$ | async as display"> <!-- display or not modal -->
+<!-- display or not modal -->
+<ng-container *ngIf="display$ | async as display">
+  <!-- madal background -->
   <section class="modal-background" [class.open]="display" (click)="close()">
     <mat-card class="form-container" (click)="$event.stopPropagation()">
-        <div class="modal"> <!-- -->
+        <div class="modal">
           <div class="form-header">
+            <!-- close modal button -->
             <button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
             <mat-card-title>Create Post</mat-card-title>          
-          </div>                                               <!-- -->
+          </div>
           <mat-card-content>
           <form [formGroup]="postForm" (submit)="onSubmit()">
             <div class="form-field">
