@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ModalService, ModalState } from 'src/app/services/modal.service';
-import { SharedService } from 'src/app/services/shared.service';
+import { Post, SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-create-post',
@@ -17,21 +17,20 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private sharedService: SharedService, private modalService: ModalService, private router: Router) { 
 
-    this.display$ = this.modalService.watch()
+    this.display$ = this.modalService.watch();
 
     this.postForm = new FormGroup({
-      name: new FormControl(''),
-      post: new FormControl('')
+      name: new FormControl('', [Validators.required]),
+      post: new FormControl('', [Validators.required])
     });
   }
 
-  ngOnInit(): void { 
-  }
+  ngOnInit(): void { }
 
   onSubmit() {
-    const post = {
-      name: this.postForm?.get('name')?.value,
-      post: this.postForm?.get('post')?.value
+    const post: Post = {
+      name: this.postForm.get('name')?.value,
+      post: this.postForm.get('post')?.value
     }
     this.sharedService.setPost(post);
     this.postForm.reset();
@@ -39,7 +38,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   close() {
-    this.modalService.close()
+    this.modalService.close();
   }
 
 }
