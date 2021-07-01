@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SharedService } from 'src/app/services/shared.service';
+import { Post, SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-posts',
@@ -9,19 +9,20 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class PostsComponent implements OnInit {
 
-  public posts: any[] = [];
-  public postSubscription?: Subscription;
+  public posts: Post[];
+  public postSubscription: Subscription;
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService) { 
+    this.posts = [];
+    this.postSubscription = this.sharedService.getPosts()
+      .subscribe(response => this.posts.push(response));
+  }
 
   ngOnInit(): void {
-    this.postSubscription = this.sharedService.getPosts().subscribe(response => {
-      this.posts.push(response);
-    });
   }
 
   ngOnDestroy() {
-    this.postSubscription?.unsubscribe();
+    this.postSubscription.unsubscribe();
   }
 
 }
