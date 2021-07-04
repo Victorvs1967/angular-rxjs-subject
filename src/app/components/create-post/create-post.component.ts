@@ -12,7 +12,6 @@ import { Post, SharedService } from 'src/app/services/shared.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  // display$: Observable<ModalState>;
   display$: Observable<ModalState>;
   postForm: FormGroup;
 
