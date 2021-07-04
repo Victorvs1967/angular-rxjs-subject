@@ -12,6 +12,7 @@ import { Post, SharedService } from 'src/app/services/shared.service';
 })
 export class CreatePostComponent implements OnInit {
 
+  // display$: Observable<ModalState>;
   display$: Observable<ModalState>;
   postForm: FormGroup;
 
@@ -25,7 +26,9 @@ export class CreatePostComponent implements OnInit {
 
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.modalService.open();
+    console.log(this.postForm.controls);
   }
 
   onSubmit() {
@@ -34,6 +37,7 @@ export class CreatePostComponent implements OnInit {
       post: this.postForm.controls.post.value
     }
     this.sharedService.setPost(post);
+    this.router.navigateByUrl('posts');
     this.close();
   }
 

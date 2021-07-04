@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 export type ModalState = 'open' | 'close';
 @Injectable({
@@ -7,7 +7,7 @@ export type ModalState = 'open' | 'close';
 })
 export class ModalService {
 
-  private display: Subject<ModalState> = new Subject();
+  private display: BehaviorSubject<ModalState> = new BehaviorSubject<ModalState>('close');
 
   watch(): Observable<ModalState> {
     return this.display.asObservable();
