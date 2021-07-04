@@ -13,11 +13,15 @@ export class PostsHeaderComponent implements OnInit {
 
   public postsCount = 0;
   public postSubscription?: Subscription;
+  public display$: Subscription;
 
-  constructor(private sharedService: SharedService, private modalService: ModalService, private router: Router) { }
+  constructor(private sharedService: SharedService, private modalService: ModalService, private router: Router) { 
+    this.display$ = this.modalService.watch().subscribe();
+  }
 
   ngOnInit(): void {
     this.postSubscription = this.sharedService.getPosts().subscribe(() => this.postsCount++);
+
   }
 
   // Open Modal
@@ -27,6 +31,7 @@ export class PostsHeaderComponent implements OnInit {
 
   ngOnDestroy() {
     this.postSubscription?.unsubscribe();
+    this.display$.unsubscribe();
   }
 
 }

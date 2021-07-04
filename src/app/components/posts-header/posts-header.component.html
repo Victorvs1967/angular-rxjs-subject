@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <div class="title" matBadge="{{ postsCount }}" matBadgeOverlap="false" matBadgeColor="warn">Posts</div>
+  <div mat-button routerLink="/" class="title" matBadge="{{ postsCount }}" matBadgeOverlap="false" matBadgeColor="warn">Posts</div>
   <span style="flex-grow: 1;"></span>
   <button mat-icon-button (click)="create()"><mat-icon>article</mat-icon></button>
 </mat-toolbar>

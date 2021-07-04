@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ModalService, ModalState } from 'src/app/services/modal.service';
 import { Post, SharedService } from 'src/app/services/shared.service';
 
@@ -12,11 +11,12 @@ import { Post, SharedService } from 'src/app/services/shared.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  display$: Observable<ModalState>;
   postForm: FormGroup;
+  display: ModalState;
 
   constructor(private sharedService: SharedService, private modalService: ModalService, private formBuilder: FormBuilder, private router: Router) { 
-    this.display$ = this.modalService.watch();
+
+    this.display = 'close';
 
     this.postForm = this.formBuilder.group({
       name: [null, { validators: [Validators.required], updateOn: 'change' }],
@@ -26,8 +26,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modalService.open();
-    console.log(this.postForm.controls);
+    this.display = 'open';
   }
 
   onSubmit() {
@@ -41,6 +40,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   close() {
+    this.display = 'close';
     this.postForm.reset();
     this.modalService.close();
   }

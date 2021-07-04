@@ -10,7 +10,7 @@ export class ModalService {
   private display: BehaviorSubject<ModalState> = new BehaviorSubject<ModalState>('close');
 
   watch(): Observable<ModalState> {
-    return this.display.asObservable();
+    return this.display;
   }
 
   open() {
